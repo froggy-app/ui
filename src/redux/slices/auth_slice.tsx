@@ -1,10 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {registrationStatusFulfilled} from 'redux/store';
+import {
+  registrationStatusFulfilled,
+  registrationStatusRejected,
+} from 'redux/store';
 
 export const AUTH_PATH = 'auth';
 
 const initialState = {
   token: null,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -19,7 +23,13 @@ const authSlice = createSlice({
     builder.addCase(
       registrationStatusFulfilled,
       (state, {payload: {token}}: any) => {
-        return {token};
+        return {token, error: null};
+      }
+    );
+    builder.addCase(
+      registrationStatusRejected,
+      ({token}, {payload: {error}}: any) => {
+        return {token, error};
       }
     );
   },
