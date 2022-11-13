@@ -1,15 +1,16 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {registerAccountAPI} from 'redux/apis/auth_apis';
-import {authPath} from 'redux/store';
-
-export const registrationStatusPath = `${authPath}/registrationStatus`;
+import {registrationStatusPath} from 'redux/store';
 
 const registerAccount: any = createAsyncThunk(
   registrationStatusPath,
-  async ({email, password}: {email: string; password: string}) =>
-    await registerAccountAPI({email, password}).then((response) => {
-      console.log(response);
-    })
+  async (
+    {email, password}: {email: string; password: string},
+    {rejectWithValue, fulfillWithValue}
+  ) =>
+    await registerAccountAPI({email, password}).then((response: any) =>
+      response.error ? rejectWithValue(response) : fulfillWithValue(response)
+    )
 );
 
 export default registerAccount;

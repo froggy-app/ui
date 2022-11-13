@@ -8,8 +8,11 @@ export const registerAccountAPI = ({
   password: string;
 }) =>
   wretch('/api/auth/register')
+    .errorType('json')
     .post({
       email,
       password,
     })
+    .error(400, (error) => error.message)
+    .error(409, (error) => error.message)
     .json();
