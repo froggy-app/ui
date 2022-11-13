@@ -14,6 +14,7 @@ export const registerAccountAPI = ({
       password,
     })
     .error(400, (error) => error.message)
+    .error(409, (error) => error.message)
     .json();
 
 // TODO: Change API response to have message, work better with wretch
