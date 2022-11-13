@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {registrationStatusFulfilled} from 'redux/store';
 
 export const AUTH_PATH = 'auth';
 
@@ -13,6 +14,14 @@ const authSlice = createSlice({
     setToken: (action, {payload: {token}}) => {
       return token;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      registrationStatusFulfilled,
+      (state, {payload: {token}}: any) => {
+        return {token};
+      }
+    );
   },
 });
 
