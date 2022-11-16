@@ -1208,14 +1208,15 @@
     "minimatch" "^3.1.2"
     "strip-json-comments" "^3.1.1"
 
-"@froggy-app/lilypad@^0.0.34":
-  "integrity" "sha512-qCLbVigze8c5x/tPkNb2psfDmZwzZ1UuJ4AN2tSXU3f8Vt1QZIvJd1poD60SvcnL6TNghHZEDrX6Z3MiVBk6ZQ=="
-  "resolved" "https://registry.npmjs.org/@froggy-app/lilypad/-/lilypad-0.0.34.tgz"
-  "version" "0.0.34"
+"@froggy-app/lilypad@^0.0.40":
+  "integrity" "sha512-DTkcZI8zzlSeoz5QGAdsTqXYL6WQWnTXY4nPt4sicsdNummruejIO4VwyE7DqGfzunypVY/ha/ABfdqGWgG6sg=="
+  "resolved" "https://registry.npmjs.org/@froggy-app/lilypad/-/lilypad-0.0.40.tgz"
+  "version" "0.0.40"
   dependencies:
     "@storybook/addon-console" "^1.2.3"
     "postcss" "^8.4.19"
     "react-dom" "^18.2.0"
+    "react-icons" "^4.6.0"
     "rollup-plugin-copy" "^3.4.0"
     "rollup-plugin-typescript2" "^0.34.1"
     "storybook-addon-state" "^1.0.3"
@@ -7705,6 +7706,11 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.11.tgz"
   "version" "6.0.11"
 
+"react-icons@^4.6.0":
+  "integrity" "sha512-rR/L9m9340yO8yv1QT1QurxWQvWpbNHqVX0fzMln2HEb9TEIrQRGsqiNFQfiv9/JEUbyHmHPlNTB2LWm2Ttz0g=="
+  "resolved" "https://registry.npmjs.org/react-icons/-/react-icons-4.6.0.tgz"
+  "version" "4.6.0"
+
 "react-inspector@^5.1.0":
   "integrity" "sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg=="
   "resolved" "https://registry.npmjs.org/react-inspector/-/react-inspector-5.1.1.tgz"
@@ -7821,7 +7827,7 @@
   optionalDependencies:
     "fsevents" "^2.3.2"
 
-"react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.4 || ^17.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.8":
+"react@*", "react@^16.8 || ^17.0 || ^18.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.4 || ^17.0.0", "react@^16.9.0 || ^17.0.0 || ^18", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.8":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"
