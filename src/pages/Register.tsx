@@ -1,4 +1,4 @@
-import {Input} from '@froggy-app/lilypad';
+import {Column, Container, Input} from '@froggy-app/lilypad';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import registerAccount from 'redux/thunks/registerAccount';
@@ -33,32 +33,38 @@ const Register = () => {
   };
 
   return (
-    <>
-      <Input
-        type='email'
-        label='Email'
-        onChange={onEmailChange}
-        onSubmit={register}
-        valid={emailValid}
-        invalid={!emailValid}
-        hint={emailValid ? '' : 'Must be a valid email'}
-      />
-      <Input
-        type='password'
-        label='Password'
-        onChange={onPasswordChange}
-        onSubmit={register}
-        valid={passwordValid}
-        invalid={!passwordValid}
-        hint={
-          passwordValid
-            ? ''
-            : 'Password must contain at least 1 lowercase, 1 uppercase, one special symbol (!@#$%^&*]) and have a length of 12-64 characters.'
-        }
-      />
+    <Container width='100vw' height='100vh'>
+      <Column alignItems='center' justifyContent='center'>
+        <Container width='clamp(200px, 50%, 600px)'>
+          <Input
+            type='email'
+            label='Email'
+            onChange={onEmailChange}
+            onSubmit={register}
+            valid={emailValid}
+            invalid={!emailValid}
+            hint={emailValid ? '' : 'Must be a valid email'}
+            className='mb-md'
+          />
+          <Input
+            type='password'
+            label='Password'
+            onChange={onPasswordChange}
+            onSubmit={register}
+            valid={passwordValid}
+            invalid={!passwordValid}
+            hint={
+              passwordValid
+                ? ''
+                : 'Password must contain at least 1 lowercase, 1 uppercase, one special symbol (!@#$%^&*]) and have a length of 12-64 characters.'
+            }
+            className='mb-md'
+          />
 
-      <button onClick={register}>Register</button>
-    </>
+          <button onClick={register}>Register</button>
+        </Container>
+      </Column>
+    </Container>
   );
 };
 
