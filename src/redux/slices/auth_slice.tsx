@@ -1,5 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {
+  loginStatusFulfilled,
+  loginStatusRejected,
   registrationStatusFulfilled,
   registrationStatusRejected,
 } from 'redux/store';
@@ -32,6 +34,12 @@ const authSlice = createSlice({
         return {token, error};
       }
     );
+    builder.addCase(loginStatusFulfilled, (state, {payload: {token}}: any) => {
+      return {token, error: null};
+    });
+    builder.addCase(loginStatusRejected, ({token}, {payload: {error}}: any) => {
+      return {token, error};
+    });
   },
 });
 
