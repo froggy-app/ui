@@ -12,7 +12,6 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const onEmailChange = ({value, valid}: {value: string; valid: boolean}) => {
-    console.log(valid);
     setEmailValid(valid);
     setEmail(value);
   };
@@ -23,7 +22,6 @@ const Register = () => {
     value: string;
     valid: boolean;
   }) => {
-    console.log(valid);
     setPasswordValid(valid);
     setPassword(value);
   };
