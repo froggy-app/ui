@@ -1,9 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {loginAPI} from 'redux/apis/auth_apis';
-import {registrationStatusPath} from 'redux/store';
+import {loginStatusPath} from 'redux/store';
 
 const loginUser: any = createAsyncThunk(
-  registrationStatusPath,
+  loginStatusPath,
   async (
     {email, password}: {email: string; password: string},
     {rejectWithValue, fulfillWithValue}

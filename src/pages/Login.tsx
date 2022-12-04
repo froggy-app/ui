@@ -10,11 +10,23 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
-  const onEmailChange = ({value}: {value: string}) => setEmail(value);
-  const onPasswordChange = ({value}: {value: string}) => setPassword(value);
+  const onEmailChange = ({value}: {value: string}) => {
+    setEmail(value);
+    setInvalid(false);
+  };
+  const onPasswordChange = ({value}: {value: string}) => {
+    setPassword(value);
+    setInvalid(false);
+  };
 
   const login = () => {
-    dispatch(loginUser({email, password}));
+    dispatch(loginUser({email, password})).then(({payload}: any) => {
+      if (payload.error) {
+        setInvalid(true);
+      } else {
+        setInvalid(false);
+      }
+    });
   };
 
   return (

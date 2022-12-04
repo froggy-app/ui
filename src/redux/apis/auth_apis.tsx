@@ -30,6 +30,5 @@ export const loginAPI = ({
       email,
       password,
     })
-    .error(400, (error) => error.message)
-    .error(409, (error) => error.message)
+    .error(401, () => ({error: 'Invalid username or password'}))
     .json();
