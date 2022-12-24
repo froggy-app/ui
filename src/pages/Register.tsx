@@ -31,8 +31,8 @@ const Register = () => {
   };
 
   return (
-    <Container width='100vw' height='100vh'>
-      <Column alignItems='center' justifyContent='center'>
+    <Container height='100vh'>
+      <Column justifyContent='center' alignItems='center'>
         <Container width='clamp(200px, 50%, 600px)'>
           <Input
             type='email'
