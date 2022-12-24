@@ -9,9 +9,7 @@ const Landing = () => {
         <Column alignItems='center' justifyContent='center'>
           <Container width='clamp(400px, 50vw, 500px)'>
             <Row justifyContent='end'>
-              <Container>
-                <Input />
-              </Container>
+              <Input />
               <Button label='shorten' />
             </Row>
           </Container>
