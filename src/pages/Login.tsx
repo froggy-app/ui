@@ -1,4 +1,4 @@
-import {Container, Column, Input} from '@froggy-app/lilypad';
+import {Column, Container, Input} from '@froggy-app/lilypad';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import loginUser from 'redux/thunks/loginUser';
@@ -30,8 +30,8 @@ const Login = () => {
   };
 
   return (
-    <Container width='100vw' height='100vh'>
-      <Column alignItems='center' justifyContent='center'>
+    <Container height='100vh'>
+      <Column justifyContent='center' alignItems='center'>
         <Container width='clamp(200px, 50%, 600px)'>
           <Input
             type='email'
