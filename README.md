@@ -22,7 +22,7 @@ Make sure that the backend is running locally. Run the following command to run
 the app in development mode:
 
 ```
-yarn start
+npm start
 ```
 
 The page will reload if you make edits.\
