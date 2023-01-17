@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "options": {
-    "allowedHosts": ["localhost", ".localhost"],
+    "allowedHosts": [
+      "localhost",
+      ".localhost"
+    ],
     "proxy": "https://localhost:8080/"
   },
   "dependencies": {
-    "@froggy-app/lilypad": "^0.0.79",
+    "@froggy-app/lilypad": "^0.0.84",
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
