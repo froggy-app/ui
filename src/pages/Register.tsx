@@ -1,4 +1,4 @@
-import {Column, Container, Input} from '@froggy-app/lilypad';
+import {Column, Container, Input, Button} from '@froggy-app/lilypad';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import registerAccount from 'redux/thunks/registerAccount';
@@ -59,7 +59,7 @@ const Register = () => {
             className='mb-md'
           />
 
-          <button onClick={register}>Register</button>
+          <Button onClick={register} label='Register' />
         </Container>
       </Column>
     </Container>

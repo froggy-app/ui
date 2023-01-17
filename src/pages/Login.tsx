@@ -1,4 +1,4 @@
-import {Column, Container, Input} from '@froggy-app/lilypad';
+import {Column, Container, Input, Button} from '@froggy-app/lilypad';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import loginUser from 'redux/thunks/loginUser';
@@ -51,7 +51,7 @@ const Login = () => {
             className='mb-md'
           />
 
-          <button onClick={login}>Log in</button>
+          <Button onClick={login} label='Log in' />
         </Container>
       </Column>
     </Container>
