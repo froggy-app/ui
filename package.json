@@ -2,7 +2,10 @@
   "name": "froggy-ui",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "options": {
+    "allowedHosts": ["localhost", ".localhost"],
+    "proxy": "https://localhost:8080/"
+  },
   "dependencies": {
     "@froggy-app/lilypad": "^0.0.79",
     "@reduxjs/toolkit": "^1.8.6",
