@@ -15,8 +15,6 @@ export const loginStatusPending = `${loginStatusPath}/pending`;
 export const loginStatusFulfilled = `${loginStatusPath}/fulfilled`;
 export const loginStatusRejected = `${loginStatusPath}/rejected`;
 
-export const createLinkStatusPath = 'createLink';
-
 export default configureStore({
   reducer: {
     [authPath]: auth_reducers,

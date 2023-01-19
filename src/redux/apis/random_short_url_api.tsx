@@ -5,11 +5,21 @@ export const randomShortUrlAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: '/api/random-short-url',
   }),
+  tagTypes: ['List'],
   endpoints: (builder) => ({
-    list: builder.query<any, void>({
+    listLinks: builder.query<any, void>({
       query: () => '/list',
+      providesTags: ['List'],
+    }),
+    createLink: builder.mutation({
+      query: (body) => ({
+        url: '/create',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['List'],
     }),
   }),
 });
 
-export const {useListQuery} = randomShortUrlAPI;
+export const {useListLinksQuery, useCreateLinkMutation} = randomShortUrlAPI;

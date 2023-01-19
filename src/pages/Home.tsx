@@ -1,19 +1,20 @@
 import {Button, Column, Input, Row} from '@froggy-app/lilypad';
 import {useState} from 'react';
-import {useDispatch} from 'react-redux';
-import {useListQuery} from 'redux/apis/random_short_url_api';
-import createLink from 'redux/thunks/createLink';
+import {
+  useCreateLinkMutation,
+  useListLinksQuery,
+} from 'redux/apis/random_short_url_api';
 
 const Home = () => {
   const [linkText, setLinkText] = useState('');
 
-  const dispatch = useDispatch();
-  const {data: urlData} = useListQuery();
+  const [createLink] = useCreateLinkMutation();
+  const {data: urlData} = useListLinksQuery();
 
   const inputChange = ({value}: {value: string}) => setLinkText(value);
 
   const create = () => {
-    dispatch(createLink({url: linkText}));
+    createLink({url: linkText});
   };
 
   return (
