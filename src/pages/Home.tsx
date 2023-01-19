@@ -9,11 +9,8 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const {data: urlData} = useListQuery({});
-  console.log(urlData);
 
   const inputChange = ({value}: {value: string}) => setLinkText(value);
-
-  console.log(linkText);
 
   const create = () => {
     dispatch(createLink({url: linkText}));
