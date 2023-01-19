@@ -4,11 +4,41 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import registerAccount from 'redux/thunks/registerAccount';
 
+const passwordRules = [
+  {
+    label: 'An uppercase character',
+    valid: (value: string) => /^(?=.*[A-Z])/.test(value),
+  },
+  {
+    label: 'A lowercase character',
+    valid: (value: string) => /^(?=.*[a-z])/.test(value),
+  },
+  {
+    label: 'A number',
+    valid: (value: string) => /^(?=.*[0-9])/.test(value),
+  },
+  {
+    label: 'A special symbol (!@#$%^&*])',
+    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value),
+  },
+  {
+    label: '12 to 64 characters',
+    valid: (value: string) => value.length >= 12 && value.length <= 64,
+  },
+];
+
+const emailRules = [
+  {
+    valid: (value: string) =>
+      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value),
+  },
+];
+
 const Register = () => {
   const [email, setEmail] = useState('');
-  const [emailValid, setEmailValid] = useState(true);
+  const [emailValid, setEmailValid] = useState(false);
   const [password, setPassword] = useState('');
-  const [passwordValid, setPasswordValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,8 +76,7 @@ const Register = () => {
             onChange={onEmailChange}
             onSubmit={register}
             valid={emailValid}
-            invalid={!emailValid}
-            hint={emailValid ? '' : 'Must be a valid email'}
+            rules={emailRules}
             className='mb-md'
           />
           <Input
@@ -56,13 +85,10 @@ const Register = () => {
             onChange={onPasswordChange}
             onSubmit={register}
             valid={passwordValid}
-            invalid={!passwordValid}
-            hint={
-              passwordValid
-                ? ''
-                : 'Password must contain at least 1 lowercase, 1 uppercase, one special symbol (!@#$%^&*]) and have a length of 12-64 characters.'
-            }
-            className='mb-md'
+            hint='Password must contain:'
+            rules={passwordRules}
+            showRules
+            className='mb-lg'
           />
 
           <Button onClick={register} label='Register' />
