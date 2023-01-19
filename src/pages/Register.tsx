@@ -4,6 +4,29 @@ import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import registerAccount from 'redux/thunks/registerAccount';
 
+const passwordRules = [
+  {
+    label: 'An uppercase character',
+    valid: (text: string) => /^(?=.*[A-Z])/.test(text),
+  },
+  {
+    label: 'A lowercase character',
+    valid: (text: string) => /^(?=.*[a-z])/.test(text),
+  },
+  {
+    label: 'A number',
+    valid: (text: string) => /^(?=.*[0-9])/.test(text),
+  },
+  {
+    label: 'A special symbol (!@#$%^&*])',
+    valid: (text: string) => /^(?=.*[!@#$%^&*])/.test(text),
+  },
+  {
+    label: '12 to 64 characters',
+    valid: (text: string) => text.length >= 12 && text.length <= 64,
+  },
+];
+
 const Register = () => {
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(true);
@@ -57,12 +80,9 @@ const Register = () => {
             onSubmit={register}
             valid={passwordValid}
             invalid={!passwordValid}
-            hint={
-              passwordValid
-                ? ''
-                : 'Password must contain at least 1 lowercase, 1 uppercase, one special symbol (!@#$%^&*]) and have a length of 12-64 characters.'
-            }
-            className='mb-md'
+            hint='Password must contain:'
+            rules={passwordRules}
+            className='mb-lg'
           />
 
           <Button onClick={register} label='Register' />
