@@ -1,6 +1,7 @@
 import {Column, Container, Input, Button} from '@froggy-app/lilypad';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import registerAccount from 'redux/thunks/registerAccount';
 
 const Register = () => {
@@ -10,6 +11,7 @@ const Register = () => {
   const [passwordValid, setPasswordValid] = useState(true);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onEmailChange = ({value, valid}: {value: string; valid: boolean}) => {
     setEmailValid(valid);
@@ -27,7 +29,11 @@ const Register = () => {
   };
 
   const register = () => {
-    dispatch(registerAccount({email, password}));
+    dispatch(registerAccount({email, password})).then(({payload}: any) => {
+      if (!payload.errors) {
+        navigate('/home');
+      }
+    });
   };
 
   return (

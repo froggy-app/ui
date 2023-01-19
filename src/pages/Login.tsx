@@ -1,6 +1,7 @@
 import {Column, Container, Input, Button} from '@froggy-app/lilypad';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import loginUser from 'redux/thunks/loginUser';
 
 const Login = () => {
@@ -9,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onEmailChange = ({value}: {value: string}) => {
     setEmail(value);
@@ -25,6 +27,7 @@ const Login = () => {
         setInvalid(true);
       } else {
         setInvalid(false);
+        navigate('/home');
       }
     });
   };

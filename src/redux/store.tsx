@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import thunkMiddleware from 'redux-thunk';
+import {randomShortUrlAPI} from './apis/random_short_url_api';
 import auth_reducers from './slices/auth_slice';
 
 export const authPath = 'auth';
@@ -17,6 +18,7 @@ export const loginStatusRejected = `${loginStatusPath}/rejected`;
 export default configureStore({
   reducer: {
     [authPath]: auth_reducers,
+    [randomShortUrlAPI.reducerPath]: randomShortUrlAPI.reducer,
   },
-  middleware: [thunkMiddleware],
+  middleware: [thunkMiddleware, randomShortUrlAPI.middleware],
 });
