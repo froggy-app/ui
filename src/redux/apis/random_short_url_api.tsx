@@ -6,7 +6,7 @@ export const randomShortUrlAPI = createApi({
     baseUrl: '/api/random-short-url',
   }),
   endpoints: (builder) => ({
-    list: builder.query({
+    list: builder.query<any, void>({
       query: () => '/list',
     }),
   }),

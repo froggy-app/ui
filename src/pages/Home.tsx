@@ -8,7 +8,7 @@ const Home = () => {
   const [linkText, setLinkText] = useState('');
 
   const dispatch = useDispatch();
-  const {data: urlData} = useListQuery({});
+  const {data: urlData} = useListQuery();
 
   const inputChange = ({value}: {value: string}) => setLinkText(value);
 
