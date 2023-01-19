@@ -1,3 +1,4 @@
+import axios from 'axios';
 import wretch from 'wretch';
 
 export const registerAccountAPI = ({
@@ -24,11 +25,10 @@ export const loginAPI = ({
   email: string;
   password: string;
 }) =>
-  wretch('/api/auth/login')
-    .errorType('json')
-    .post({
-      email,
-      password,
-    })
-    .error(401, () => ({error: 'Invalid username or password'}))
-    .json();
+  axios
+    .post('/api/auth/login', {email, password})
+    .catch(({response: {status}}) => {
+      if (status === 401) {
+        return {error: 'Invalid username or password'};
+      }
+    });
