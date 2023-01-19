@@ -7,31 +7,38 @@ import registerAccount from 'redux/thunks/registerAccount';
 const passwordRules = [
   {
     label: 'An uppercase character',
-    valid: (text: string) => /^(?=.*[A-Z])/.test(text),
+    valid: (value: string) => /^(?=.*[A-Z])/.test(value),
   },
   {
     label: 'A lowercase character',
-    valid: (text: string) => /^(?=.*[a-z])/.test(text),
+    valid: (value: string) => /^(?=.*[a-z])/.test(value),
   },
   {
     label: 'A number',
-    valid: (text: string) => /^(?=.*[0-9])/.test(text),
+    valid: (value: string) => /^(?=.*[0-9])/.test(value),
   },
   {
     label: 'A special symbol (!@#$%^&*])',
-    valid: (text: string) => /^(?=.*[!@#$%^&*])/.test(text),
+    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value),
   },
   {
     label: '12 to 64 characters',
-    valid: (text: string) => text.length >= 12 && text.length <= 64,
+    valid: (value: string) => value.length >= 12 && value.length <= 64,
+  },
+];
+
+const emailRules = [
+  {
+    valid: (value: string) =>
+      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value),
   },
 ];
 
 const Register = () => {
   const [email, setEmail] = useState('');
-  const [emailValid, setEmailValid] = useState(true);
+  const [emailValid, setEmailValid] = useState(false);
   const [password, setPassword] = useState('');
-  const [passwordValid, setPasswordValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,8 +76,7 @@ const Register = () => {
             onChange={onEmailChange}
             onSubmit={register}
             valid={emailValid}
-            invalid={!emailValid}
-            hint={emailValid ? '' : 'Must be a valid email'}
+            rules={emailRules}
             className='mb-md'
           />
           <Input
@@ -79,9 +85,9 @@ const Register = () => {
             onChange={onPasswordChange}
             onSubmit={register}
             valid={passwordValid}
-            invalid={!passwordValid}
             hint='Password must contain:'
             rules={passwordRules}
+            showRules
             className='mb-lg'
           />
 
