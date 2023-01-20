@@ -26,9 +26,11 @@ const Home = () => {
       </Row>
 
       <Column>
-        {urlData?.map(({url}: {url: string}, i: number) => (
-          <p key={i}>{url}</p>
-        ))}
+        {urlData?.map(
+          ({id, url, code}: {id: string; url: string; code: string}) => (
+            <p key={id}>{`${url} - https://froggy.app/s/${code}`}</p>
+          )
+        )}
       </Column>
     </>
   );
