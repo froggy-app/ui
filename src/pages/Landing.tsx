@@ -1,22 +1,31 @@
-import {Column, Input, Container, Row, Button} from '@froggy-app/lilypad';
+import {Column, Container, Row, Button} from '@froggy-app/lilypad';
 import Navbar from 'components/shared/Navbar';
+import {useNavigate} from 'react-router-dom';
 
 const Landing = () => {
-  const shorten = () => {
-    return;
-  };
+  const navigate = useNavigate();
+  const navigateToRegister = () => navigate('/register');
 
   return (
     <Container height='100vh'>
       <Column>
         <Navbar />
         <Column alignItems='center' justifyContent='center'>
-          <Container width='clamp(400px, 50vw, 500px)'>
-            <Row justifyContent='end'>
-              <Input />
-              <Button label='shorten' onClick={shorten} />
-            </Row>
-          </Container>
+          <Row justifyContent='center' alignItems='center'>
+            <Container width='370px' className='mr-xl'>
+              <h1 className='mb-xs jumbo'>Shorten links and gather data.</h1>
+              <p className='mt-sm'>
+                froggy makes sharing links easy, with short and easy to type
+                links. Our analytics dashboards make it easy to get to know your
+                customer.
+              </p>
+              <Button
+                label='Get started'
+                onClick={navigateToRegister}
+                className='mt-lg'
+              />
+            </Container>
+          </Row>
         </Column>
       </Column>
     </Container>
