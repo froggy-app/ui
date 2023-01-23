@@ -1,4 +1,4 @@
-import {Button, Column, Input, Row} from '@froggy-app/lilypad';
+import {Button, Column, Input, Row, Container} from '@froggy-app/lilypad';
 import {useState} from 'react';
 import {
   useCreateLinkMutation,
@@ -18,21 +18,55 @@ const Home = () => {
   };
 
   return (
-    <>
-      <h1>Home</h1>
-      <Row>
-        <Input onChange={inputChange} />
-        <Button label='Shorten' onClick={create} />
+    <Container className='mx-md'>
+      <h1 className='my-md'>Home</h1>
+
+      <Row justifyContent='center'>
+        <Container width='clamp(100px, 50vw, 500px)'>
+          <Row justifyContent='center'>
+            <p className='pb-sm'>Enter a link to shorten</p>
+          </Row>
+          <Row>
+            <Input onChange={inputChange} onSubmit={create} />
+            <Button label='Shorten' onClick={create} className='ml-xs' />
+          </Row>
+        </Container>
       </Row>
 
-      <Column>
-        {urlData?.map(
-          ({id, url, code}: {id: string; url: string; code: string}) => (
-            <p key={id}>{`${url} - https://froggy.app/s/${code}`}</p>
-          )
-        )}
-      </Column>
-    </>
+      <h2 className='mt-lg mb-sm'>My Links</h2>
+      <Row>
+        <Container className='mr-md'>
+          <Column>
+            <h3 className='mb-sm'>Link</h3>
+            {urlData?.map(({id, url}: {id: string; url: string}) => (
+              <a
+                target='_blank'
+                rel='noreferrer'
+                className='mb-sm'
+                href={url}
+                key={`${id}-link`}
+              >
+                {url}
+              </a>
+            ))}
+          </Column>
+        </Container>
+        <Container className='mr-md'>
+          <Column>
+            <h3 className='mb-sm'>Froggy Link</h3>
+            {urlData?.map(({id, code}: {id: string; code: string}) => (
+              <a
+                target='_blank'
+                rel='noreferrer'
+                className='mb-sm'
+                href={`https://froggy.app/s/${code}`}
+                key={`${id}-froggy-link`}
+              >{`https://froggy.app/s/${code}`}</a>
+            ))}
+          </Column>
+        </Container>
+      </Row>
+    </Container>
   );
 };
 
