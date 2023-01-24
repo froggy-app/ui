@@ -12,22 +12,7 @@ export const registerAccountAPI = ({
     .catch(({response: {status, data}}) => {
       const {errors} = data;
 
-      if (status === 400) {
-        if (
-          errors[0].field === 'password' &&
-          errors[0].reason === 'validation'
-        ) {
-          // Should never happen (UI should disable submit button if passoword is invalid)
-          return {error: 'Password does not meet criteria'};
-        } else if (
-          errors[0].field === 'email' &&
-          errors[0].reason === 'unique'
-        ) {
-          return {error: 'An account with this email already exists'};
-        }
-      }
-
-      return errors;
+      return {errors, status};
     });
 
 export const loginAPI = ({
