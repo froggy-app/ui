@@ -37,7 +37,7 @@ const authSlice = createSlice({
               field === 'email' && reason === 'unique'
           )
         ) {
-          return {token, error: 'An account already exists with this email'};
+          return {token, error: 'An account with this email already exists'};
         } else {
           return {token, error: 'Invalid credentials'};
         }
