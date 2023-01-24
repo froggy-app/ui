@@ -11,7 +11,6 @@ export const registerAccountAPI = ({
     .post('/api/auth/register', {email, password})
     .catch(({response: {status, data}}) => {
       const {errors} = data;
-
       return {errors, status};
     });
 
