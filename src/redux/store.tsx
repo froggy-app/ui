@@ -20,7 +20,7 @@ export interface ReduxStore {
 }
 
 export interface AuthSlice {
-  error: string;
+  error: string | null;
 }
 
 export default configureStore({

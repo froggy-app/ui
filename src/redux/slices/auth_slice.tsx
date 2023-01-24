@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {
+  AuthSlice,
   loginStatusFulfilled,
   loginStatusRejected,
   registrationStatusFulfilled,
@@ -8,50 +9,41 @@ import {
 
 export const AUTH_PATH = 'auth';
 
-const initialState = {
-  token: null,
+const initialState: AuthSlice = {
   error: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setToken: (action, {payload: {token}}) => {
-      return token;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(
-      registrationStatusFulfilled,
-      (state, {payload: {token}}: any) => {
-        return {token, error: null};
-      }
-    );
+    builder.addCase(registrationStatusFulfilled, () => {
+      return {error: null};
+    });
     builder.addCase(
       registrationStatusRejected,
-      ({token}, {payload: {errors}}: any) => {
+      (state, {payload: {errors}}: any) => {
         if (
           errors.some(
             ({field, reason}: {field: string; reason: string}) =>
               field === 'email' && reason === 'unique'
           )
         ) {
-          return {token, error: 'An account with this email already exists'};
+          return {error: 'An account with this email already exists'};
         } else {
-          return {token, error: 'Invalid credentials'};
+          return {error: 'Invalid credentials'};
         }
       }
     );
-    builder.addCase(loginStatusFulfilled, (state, {payload: {token}}: any) => {
-      return {token, error: null};
+    builder.addCase(loginStatusFulfilled, () => {
+      return {error: null};
     });
-    builder.addCase(loginStatusRejected, ({token}, {payload: {error}}: any) => {
-      return {token, error};
+    builder.addCase(loginStatusRejected, (state, {payload: {error}}: any) => {
+      return {error};
     });
   },
 });
 
-const {actions, reducer: auth_reducers} = authSlice;
-export const {setToken} = actions;
+const {reducer: auth_reducers} = authSlice;
 export default auth_reducers;
