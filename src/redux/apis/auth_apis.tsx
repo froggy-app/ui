@@ -1,5 +1,4 @@
 import axios from 'axios';
-import wretch from 'wretch';
 
 export const registerAccountAPI = ({
   email,
@@ -8,15 +7,28 @@ export const registerAccountAPI = ({
   email: string;
   password: string;
 }) =>
-  wretch('/api/auth/register')
-    .errorType('json')
-    .post({
-      email,
-      password,
-    })
-    .error(400, (error) => error.message)
-    .error(409, (error) => error.message)
-    .json();
+  axios
+    .post('/api/auth/register', {email, password})
+    .catch(({response: {status, data}}) => {
+      const {errors} = data;
+
+      if (status === 400) {
+        if (
+          errors[0].field === 'password' &&
+          errors[0].reason === 'validation'
+        ) {
+          // Should never happen (UI should disable submit button if passoword is invalid)
+          return {error: 'Password does not meet criteria'};
+        } else if (
+          errors[0].field === 'email' &&
+          errors[0].reason === 'unique'
+        ) {
+          return {error: 'An account with this email already exists'};
+        }
+      }
+
+      return errors;
+    });
 
 export const loginAPI = ({
   email,
