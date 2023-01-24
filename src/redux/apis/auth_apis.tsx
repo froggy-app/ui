@@ -1,5 +1,4 @@
 import axios from 'axios';
-import wretch from 'wretch';
 
 export const registerAccountAPI = ({
   email,
@@ -8,15 +7,12 @@ export const registerAccountAPI = ({
   email: string;
   password: string;
 }) =>
-  wretch('/api/auth/register')
-    .errorType('json')
-    .post({
-      email,
-      password,
-    })
-    .error(400, (error) => error.message)
-    .error(409, (error) => error.message)
-    .json();
+  axios
+    .post('/api/auth/register', {email, password})
+    .catch(({response: {status, data}}) => {
+      const {errors} = data;
+      return {errors, status};
+    });
 
 export const loginAPI = ({
   email,

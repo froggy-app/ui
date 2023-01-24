@@ -15,6 +15,14 @@ export const loginStatusPending = `${loginStatusPath}/pending`;
 export const loginStatusFulfilled = `${loginStatusPath}/fulfilled`;
 export const loginStatusRejected = `${loginStatusPath}/rejected`;
 
+export interface ReduxStore {
+  auth: AuthSlice;
+}
+
+export interface AuthSlice {
+  error: string;
+}
+
 export default configureStore({
   reducer: {
     [authPath]: auth_reducers,

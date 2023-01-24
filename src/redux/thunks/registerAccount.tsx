@@ -9,7 +9,7 @@ const registerAccount: any = createAsyncThunk(
     {rejectWithValue, fulfillWithValue}
   ) =>
     await registerAccountAPI({email, password}).then((response: any) =>
-      response.error ? rejectWithValue(response) : fulfillWithValue(response)
+      response.errors ? rejectWithValue(response) : fulfillWithValue(response)
     )
 );
 

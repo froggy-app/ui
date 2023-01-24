@@ -30,8 +30,17 @@ const authSlice = createSlice({
     );
     builder.addCase(
       registrationStatusRejected,
-      ({token}, {payload: {error}}: any) => {
-        return {token, error};
+      ({token}, {payload: {errors}}: any) => {
+        if (
+          errors.some(
+            ({field, reason}: {field: string; reason: string}) =>
+              field === 'email' && reason === 'unique'
+          )
+        ) {
+          return {token, error: 'An account with this email already exists'};
+        } else {
+          return {token, error: 'Invalid credentials'};
+        }
       }
     );
     builder.addCase(loginStatusFulfilled, (state, {payload: {token}}: any) => {
