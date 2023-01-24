@@ -9,7 +9,6 @@ const loginUser: any = createAsyncThunk(
     {rejectWithValue, fulfillWithValue}
   ) =>
     await loginAPI({email, password}).then((response: any) => {
-      console.log(response);
       return response.error
         ? rejectWithValue(response)
         : fulfillWithValue(response.data);
