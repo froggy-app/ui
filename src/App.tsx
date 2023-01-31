@@ -1,4 +1,4 @@
-import AuthGateway from 'pages/AuthGateway';
+import AuthGateway from 'components/routing/AuthGateway';
 import Home from 'pages/Home';
 import Landing from 'pages/Landing';
 import Login from 'pages/Login';
