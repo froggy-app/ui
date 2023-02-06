@@ -8,9 +8,18 @@ const registerAccount: any = createAsyncThunk(
     {email, password}: {email: string; password: string},
     {rejectWithValue, fulfillWithValue}
   ) =>
-    await registerAccountAPI({email, password}).then((response: any) =>
-      response.errors ? rejectWithValue(response) : fulfillWithValue(response)
-    )
+    await registerAccountAPI({email, password}).then((response: any) => {
+      if (response.errors) {
+        return rejectWithValue(response);
+      } else {
+        console.log(response);
+        const {data} = response;
+        const {expire} = data;
+
+        localStorage.setItem('tokenExpire', expire);
+        return fulfillWithValue(response);
+      }
+    })
 );
 
 export default registerAccount;

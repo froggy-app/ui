@@ -9,9 +9,15 @@ const loginUser: any = createAsyncThunk(
     {rejectWithValue, fulfillWithValue}
   ) =>
     await loginAPI({email, password}).then((response: any) => {
-      return response.error
-        ? rejectWithValue(response)
-        : fulfillWithValue(response.data);
+      if (response.error) {
+        return rejectWithValue(response);
+      } else {
+        const {data} = response;
+        const {expire} = data;
+
+        localStorage.setItem('tokenExpire', expire);
+        return fulfillWithValue(data);
+      }
     })
 );
 
