@@ -1,4 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {TOKEN_KEY} from 'components/routing/AuthGateway';
 import {registerAccountAPI} from 'redux/apis/auth_apis';
 import {registrationStatusPath} from 'redux/store';
 
@@ -8,9 +9,18 @@ const registerAccount: any = createAsyncThunk(
     {email, password}: {email: string; password: string},
     {rejectWithValue, fulfillWithValue}
   ) =>
-    await registerAccountAPI({email, password}).then((response: any) =>
-      response.errors ? rejectWithValue(response) : fulfillWithValue(response)
-    )
+    await registerAccountAPI({email, password}).then((response: any) => {
+      if (response.errors) {
+        return rejectWithValue(response);
+      } else {
+        console.log(response);
+        const {data} = response;
+        const {expire} = data;
+
+        localStorage.setItem(TOKEN_KEY, expire);
+        return fulfillWithValue(response);
+      }
+    })
 );
 
 export default registerAccount;

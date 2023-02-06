@@ -1,4 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {TOKEN_KEY} from 'components/routing/AuthGateway';
 import {loginAPI} from 'redux/apis/auth_apis';
 import {loginStatusPath} from 'redux/store';
 
@@ -9,9 +10,15 @@ const loginUser: any = createAsyncThunk(
     {rejectWithValue, fulfillWithValue}
   ) =>
     await loginAPI({email, password}).then((response: any) => {
-      return response.error
-        ? rejectWithValue(response)
-        : fulfillWithValue(response.data);
+      if (response.error) {
+        return rejectWithValue(response);
+      } else {
+        const {data} = response;
+        const {expire} = data;
+
+        localStorage.setItem(TOKEN_KEY, expire);
+        return fulfillWithValue(data);
+      }
     })
 );
 

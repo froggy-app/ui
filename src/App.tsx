@@ -1,3 +1,4 @@
+import AuthGateway from 'components/routing/AuthGateway';
 import Home from 'pages/Home';
 import Landing from 'pages/Landing';
 import Login from 'pages/Login';
@@ -11,11 +12,16 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/home' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/' element={<Landing />} />
-        <Route path='*' element={<Landing />} />
+        <Route>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/' element={<Landing />} />
+          <Route path='*' element={<Landing />} />
+        </Route>
+
+        <Route element={<AuthGateway />}>
+          <Route path='/home' element={<Home />} />
+        </Route>
       </Routes>
     </Router>
   );
