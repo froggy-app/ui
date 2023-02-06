@@ -1,15 +1,25 @@
 import {Navigate, Outlet} from 'react-router-dom';
-import Cookies from 'js-cookie';
+
+export const TOKEN_KEY = 'tokenExpire';
 
 const AuthGateway = () => {
-  // Temporary
-  const expire = localStorage.getItem('test');
-  const loggedIn = true;
-  console.log(expire);
-  console.log('checking for auth');
-  console.log(Cookies.get('jwt'));
+  const expire: string | null = localStorage.getItem(TOKEN_KEY);
 
-  return loggedIn ? <Outlet /> : <Navigate to={'/login'} replace />;
+  if (expire != null) {
+    const expireTime = new Date(expire);
+    const currentTime = new Date();
+
+    if (expireTime > currentTime) {
+      // Navigate to the given route
+      return <Outlet />;
+    } else {
+      // Remove the expired date
+      localStorage.removeItem(TOKEN_KEY);
+    }
+  }
+
+  // Navigate to the login page
+  return <Navigate to={'/login'} replace />;
 };
 
 export default AuthGateway;

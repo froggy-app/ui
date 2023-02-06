@@ -1,4 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
+import {TOKEN_KEY} from 'components/routing/AuthGateway';
 import {loginAPI} from 'redux/apis/auth_apis';
 import {loginStatusPath} from 'redux/store';
 
@@ -15,7 +16,7 @@ const loginUser: any = createAsyncThunk(
         const {data} = response;
         const {expire} = data;
 
-        localStorage.setItem('tokenExpire', expire);
+        localStorage.setItem(TOKEN_KEY, expire);
         return fulfillWithValue(data);
       }
     })
