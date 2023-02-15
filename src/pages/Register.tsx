@@ -1,7 +1,7 @@
-import {Column, Container, Input, Button} from '@froggy-app/lilypad';
-import {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
+import { Column, Container, Input, Button } from '@froggy-app/lilypad';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import selectAuthError from 'redux/selectors/selectAuthError';
 import registerAccount from 'redux/thunks/registerAccount';
 
@@ -28,13 +28,6 @@ const passwordRules = [
   },
 ];
 
-const emailRules = [
-  {
-    valid: (value: string) =>
-      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value),
-  },
-];
-
 const Register = () => {
   const [email, setEmail] = useState('');
   const [emailValid, setEmailValid] = useState(false);
@@ -46,7 +39,13 @@ const Register = () => {
   const authError = useSelector(selectAuthError);
   const isAuthError = authError !== null;
 
-  const onEmailChange = ({value, valid}: {value: string; valid: boolean}) => {
+  const onEmailChange = ({
+    value,
+    valid,
+  }: {
+    value: string;
+    valid: boolean;
+  }) => {
     setEmailValid(valid);
     setEmail(value);
   };
@@ -62,7 +61,7 @@ const Register = () => {
   };
 
   const register = () => {
-    dispatch(registerAccount({email, password})).then(({payload}: any) => {
+    dispatch(registerAccount({ email, password })).then(({ payload }: any) => {
       if (!payload.errors) {
         navigate('/home');
       }
@@ -70,33 +69,32 @@ const Register = () => {
   };
 
   return (
-    <Container height='100vh'>
-      <Column justifyContent='center' alignItems='center'>
-        <Container width='clamp(200px, 50%, 600px)'>
+    <Container height="100vh">
+      <Column justifyContent="center" alignItems="center">
+        <Container width="clamp(200px, 50%, 600px)">
           <Input
-            type='email'
-            label='Email'
+            type="email"
+            label="Email"
             onChange={onEmailChange}
             onSubmit={register}
             valid={emailValid && !isAuthError}
             invalid={isAuthError}
             hint={isAuthError ? authError : ''}
-            rules={emailRules}
-            className='mb-md'
+            className="mb-md"
           />
           <Input
-            type='password'
-            label='Password'
+            type="password"
+            label="Password"
             onChange={onPasswordChange}
             onSubmit={register}
             valid={passwordValid}
-            hint='Password must contain:'
+            hint="Password must contain:"
             rules={passwordRules}
             showRules
-            className='mb-lg'
+            className="mb-lg"
           />
 
-          <Button onClick={register} label='Register' />
+          <Button onClick={register} label="Register" />
         </Container>
       </Column>
     </Container>
