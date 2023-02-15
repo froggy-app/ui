@@ -8,24 +8,48 @@ import registerAccount from 'redux/thunks/registerAccount';
 const passwordRules = [
   {
     label: 'An uppercase character',
-    valid: (value: string) => /^(?=.*[A-Z])/.test(value),
+    valid: (value: string) => /^(?=.*[A-Z])/.test(value)
   },
   {
     label: 'A lowercase character',
-    valid: (value: string) => /^(?=.*[a-z])/.test(value),
+    valid: (value: string) => /^(?=.*[a-z])/.test(value)
   },
   {
     label: 'A number',
-    valid: (value: string) => /^(?=.*[0-9])/.test(value),
+    valid: (value: string) => /^(?=.*[0-9])/.test(value)
   },
   {
     label: 'A special symbol (!@#$%^&*])',
-    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value),
+    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value)
   },
   {
     label: '12 to 64 characters',
-    valid: (value: string) => value.length >= 12 && value.length <= 64,
-  },
+    valid: (value: string) => value.length >= 12 && value.length <= 64
+  }
+];
+
+const emailRules = [
+  {
+    valid: (value: string) => {
+      const tokens = value.split('@');
+
+      if (tokens.length != 2) {
+        return false;
+      }
+
+      // Section before the @ (as well as domain name) is inherently valid because of the inputs allowed chars
+      const domainStr = tokens[1];
+      const domainTokens = domainStr.split('.');
+
+      if (domainTokens.length != 2) {
+        return false;
+      }
+
+      const tld = domainTokens[1];
+
+      return /^[a-zA-Z]+$/.test(tld);
+    }
+  }
 ];
 
 const Register = () => {
@@ -41,7 +65,7 @@ const Register = () => {
 
   const onEmailChange = ({
     value,
-    valid,
+    valid
   }: {
     value: string;
     valid: boolean;
@@ -51,7 +75,7 @@ const Register = () => {
   };
   const onPasswordChange = ({
     value,
-    valid,
+    valid
   }: {
     value: string;
     valid: boolean;
@@ -80,6 +104,7 @@ const Register = () => {
             valid={emailValid && !isAuthError}
             invalid={isAuthError}
             hint={isAuthError ? authError : ''}
+            rules={emailRules}
             className="mb-md"
           />
           <Input
