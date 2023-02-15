@@ -1,4 +1,4 @@
-import {Row, Container} from '@froggy-app/lilypad';
+import { Row, Container } from '@froggy-app/lilypad';
 import froggyLogo from 'assets/images/froggy-logo.png';
 
 const Navbar = () => {
