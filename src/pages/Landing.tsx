@@ -1,28 +1,41 @@
-import {Column, Container, Row, Button} from '@froggy-app/lilypad';
-import Navbar from 'components/shared/Navbar';
-import {useNavigate} from 'react-router-dom';
+import { Column, Container, Row, Button } from "@froggy-app/lilypad";
+import froggyLogo from "assets/images/froggy-logo.png";
+import NavbarContainer from "components/shared/NavbarContainer";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
   const navigate = useNavigate();
-  const navigateToRegister = () => navigate('/register');
+  const navigateToRegister = () => navigate("/register");
 
   return (
-    <Container height='100vh'>
+    <Container height="100vh">
       <Column>
-        <Navbar />
-        <Column alignItems='center' justifyContent='center'>
-          <Row justifyContent='center' alignItems='center'>
-            <Container width='370px' className='mr-xl'>
-              <h1 className='mb-xs jumbo'>Shorten links and gather data.</h1>
-              <p className='mt-sm'>
+        <NavbarContainer
+          leading={
+            <>
+              <img src={froggyLogo} className="navbar-logo mr-xs" />
+              <h1>froggy</h1>
+            </>
+          }
+        >
+          <a href="/register" className="pr-md">
+            Register
+          </a>
+          <a href="/login">Login</a>
+        </NavbarContainer>
+        <Column alignItems="center" justifyContent="center">
+          <Row justifyContent="center" alignItems="center">
+            <Container width="370px" className="mr-xl">
+              <h1 className="mb-xs jumbo">Shorten links and gather data.</h1>
+              <p className="mt-sm">
                 froggy makes sharing links easy, with short and easy to type
                 links. Our analytics dashboards make it easy to get to know your
                 customer.
               </p>
               <Button
-                label='Get started'
+                label="Get started"
                 onClick={navigateToRegister}
-                className='mt-lg'
+                className="mt-lg"
               />
             </Container>
           </Row>
