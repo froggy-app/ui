@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import selectAuthError from 'redux/selectors/selectAuthError';
+import { RegisterResponse } from 'redux/slices/auth_slice';
 import registerAccount from 'redux/thunks/registerAccount';
 
 const passwordRules = [
@@ -85,11 +86,13 @@ const Register = () => {
   };
 
   const register = () => {
-    dispatch(registerAccount({ email, password })).then(({ payload }: any) => {
-      if (!payload.errors) {
-        navigate('/home');
+    dispatch(registerAccount({ email, password })).then(
+      ({ payload }: RegisterResponse) => {
+        if (payload && !payload.errors) {
+          navigate('/home');
+        }
       }
-    });
+    );
   };
 
   return (
