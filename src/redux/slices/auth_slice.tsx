@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {
   AuthSlice,
   loginStatusFulfilled,
@@ -35,23 +35,23 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(registrationStatusFulfilled, () => {
-      return { error: null };
+      return {error: null};
     });
     builder.addCase(
       registrationStatusRejected,
-      (state, { payload }: RegisterResponse) => {
+      (state, {payload}: RegisterResponse) => {
         if (payload) {
-          const { errors } = payload;
+          const {errors} = payload;
 
           if (
             errors.some(
-              ({ field, reason }: { field: string; reason: string }) =>
+              ({field, reason}: {field: string; reason: string}) =>
                 field === 'email' && reason === 'unique'
             )
           ) {
-            return { error: 'An account with this email already exists' };
+            return {error: 'An account with this email already exists'};
           } else {
-            return { error: 'Invalid email or password' };
+            return {error: 'Invalid email or password'};
           }
         } else {
           return {
@@ -61,20 +61,17 @@ const authSlice = createSlice({
       }
     );
     builder.addCase(loginStatusFulfilled, () => {
-      return { error: null };
+      return {error: null};
     });
-    builder.addCase(
-      loginStatusRejected,
-      (state, { payload }: LoginResponse) => {
-        return payload
-          ? payload.error
-          : {
-              error: 'Unknown error: Server did not response to login request'
-            };
-      }
-    );
+    builder.addCase(loginStatusRejected, (state, {payload}: LoginResponse) => {
+      return payload
+        ? payload.error
+        : {
+            error: 'Unknown error: Server did not response to login request'
+          };
+    });
   }
 });
 
-const { reducer: auth_reducers } = authSlice;
+const {reducer: auth_reducers} = authSlice;
 export default auth_reducers;

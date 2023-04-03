@@ -1,8 +1,8 @@
-import { Column, Container, Input, Button } from '@froggy-app/lilypad';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { LoginResponse } from 'redux/slices/auth_slice';
+import {Column, Container, Input, Button} from '@froggy-app/lilypad';
+import {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {LoginResponse} from 'redux/slices/auth_slice';
 import loginUser from 'redux/thunks/loginUser';
 
 const Login = () => {
@@ -13,26 +13,24 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onEmailChange = ({ value }: { value: string }) => {
+  const onEmailChange = ({value}: {value: string}) => {
     setEmail(value);
     setInvalid(false);
   };
-  const onPasswordChange = ({ value }: { value: string }) => {
+  const onPasswordChange = ({value}: {value: string}) => {
     setPassword(value);
     setInvalid(false);
   };
 
   const login = () => {
-    dispatch(loginUser({ email, password })).then(
-      ({ payload }: LoginResponse) => {
-        if (payload && payload.error) {
-          setInvalid(true);
-        } else {
-          setInvalid(false);
-          navigate('/home');
-        }
+    dispatch(loginUser({email, password})).then(({payload}: LoginResponse) => {
+      if (payload && payload.error) {
+        setInvalid(true);
+      } else {
+        setInvalid(false);
+        navigate('/home');
       }
-    );
+    });
   };
 
   return (
