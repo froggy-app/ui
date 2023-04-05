@@ -5,7 +5,9 @@ import {useNavigate} from 'react-router-dom';
 
 const Landing = () => {
   const navigate = useNavigate();
+
   const navigateToRegister = () => navigate('/register');
+  const navigateToLogin = () => navigate('/login');
 
   return (
     <Container height="100vh">
@@ -18,8 +20,8 @@ const Landing = () => {
             </>
           }
         >
-          <TextButton label="Register" onClick={() => navigate('/register')} />
-          <TextButton label="Login" onClick={() => navigate('/login')} />
+          <TextButton label="Register" onClick={navigateToRegister} />
+          <TextButton label="Login" onClick={navigateToLogin} />
         </NavbarContainer>
         <Column alignItems="center" justifyContent="center">
           <Row justifyContent="center" alignItems="center">
