@@ -1,13 +1,7 @@
-import {
-  Column,
-  Container,
-  Row,
-  Button,
-  TextButton,
-} from '@froggy-app/lilypad';
+import {Column, Container, Row, Button, TextButton} from '@froggy-app/lilypad';
 import froggyLogo from 'assets/images/froggy-logo.png';
 import NavbarContainer from 'components/shared/NavbarContainer';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const Landing = () => {
   const navigate = useNavigate();
