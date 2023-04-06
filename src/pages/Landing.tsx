@@ -1,11 +1,13 @@
-import { Column, Container, Row, Button } from "@froggy-app/lilypad";
-import froggyLogo from "assets/images/froggy-logo.png";
-import NavbarContainer from "components/shared/NavbarContainer";
-import { useNavigate } from "react-router-dom";
+import {Column, Container, Row, Button, TextButton} from '@froggy-app/lilypad';
+import froggyLogo from 'assets/images/froggy-logo.png';
+import NavbarContainer from 'components/shared/NavbarContainer';
+import {useNavigate} from 'react-router-dom';
 
 const Landing = () => {
   const navigate = useNavigate();
-  const navigateToRegister = () => navigate("/register");
+
+  const navigateToRegister = () => navigate('/register');
+  const navigateToLogin = () => navigate('/login');
 
   return (
     <Container height="100vh">
@@ -18,10 +20,8 @@ const Landing = () => {
             </>
           }
         >
-          <a href="/register" className="pr-md">
-            Register
-          </a>
-          <a href="/login">Login</a>
+          <TextButton label="Register" onClick={navigateToRegister} />
+          <TextButton label="Login" onClick={navigateToLogin} />
         </NavbarContainer>
         <Column alignItems="center" justifyContent="center">
           <Row justifyContent="center" alignItems="center">
