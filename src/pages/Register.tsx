@@ -1,7 +1,7 @@
-import { Column, Container, Input, Button } from '@froggy-app/lilypad';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import {Column, Container, Input, Button} from '@froggy-app/lilypad';
+import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import selectAuthError from 'redux/selectors/selectAuthError';
 import registerAccount from 'redux/thunks/registerAccount';
 
@@ -63,13 +63,7 @@ const Register = () => {
   const authError = useSelector(selectAuthError);
   const isAuthError = authError !== null;
 
-  const onEmailChange = ({
-    value,
-    valid
-  }: {
-    value: string;
-    valid: boolean;
-  }) => {
+  const onEmailChange = ({value, valid}: {value: string; valid: boolean}) => {
     setEmailValid(valid);
     setEmail(value);
   };
@@ -85,7 +79,7 @@ const Register = () => {
   };
 
   const register = () => {
-    dispatch(registerAccount({ email, password })).then(({ payload }: any) => {
+    dispatch(registerAccount({email, password})).then(({payload}: any) => {
       if (!payload.errors) {
         navigate('/home');
       }

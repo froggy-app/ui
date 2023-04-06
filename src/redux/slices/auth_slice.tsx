@@ -1,16 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {
   AuthSlice,
   loginStatusFulfilled,
   loginStatusRejected,
   registrationStatusFulfilled,
-  registrationStatusRejected,
+  registrationStatusRejected
 } from 'redux/store';
 
 export const AUTH_PATH = 'auth';
 
 const initialState: AuthSlice = {
-  error: null,
+  error: null
 };
 
 const authSlice = createSlice({
@@ -19,34 +19,31 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(registrationStatusFulfilled, () => {
-      return { error: null };
+      return {error: null};
     });
     builder.addCase(
       registrationStatusRejected,
-      (state, { payload: { errors } }: any) => {
+      (state, {payload: {errors}}: any) => {
         if (
           errors.some(
-            ({ field, reason }: { field: string; reason: string }) =>
+            ({field, reason}: {field: string; reason: string}) =>
               field === 'email' && reason === 'unique'
           )
         ) {
-          return { error: 'An account with this email already exists' };
+          return {error: 'An account with this email already exists'};
         } else {
-          return { error: 'Invalid email or password' };
+          return {error: 'Invalid email or password'};
         }
       }
     );
     builder.addCase(loginStatusFulfilled, () => {
-      return { error: null };
+      return {error: null};
     });
-    builder.addCase(
-      loginStatusRejected,
-      (state, { payload: { error } }: any) => {
-        return { error };
-      }
-    );
-  },
+    builder.addCase(loginStatusRejected, (state, {payload: {error}}: any) => {
+      return {error};
+    });
+  }
 });
 
-const { reducer: auth_reducers } = authSlice;
+const {reducer: auth_reducers} = authSlice;
 export default auth_reducers;
