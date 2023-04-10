@@ -99,7 +99,7 @@ const Register = () => {
           <Button
             onClick={register}
             label="Register"
-            disabled={!passwordValid || !emailValid || isAuthError}
+            disabled={!passwordValid || !emailValid}
           />
         </Container>
       </Column>
