@@ -8,31 +8,31 @@ import registerAccount from 'redux/thunks/registerAccount';
 const passwordRules = [
   {
     label: 'An uppercase character',
-    valid: (value: string) => /^(?=.*[A-Z])/.test(value),
+    valid: (value: string) => /^(?=.*[A-Z])/.test(value)
   },
   {
     label: 'A lowercase character',
-    valid: (value: string) => /^(?=.*[a-z])/.test(value),
+    valid: (value: string) => /^(?=.*[a-z])/.test(value)
   },
   {
     label: 'A number',
-    valid: (value: string) => /^(?=.*[0-9])/.test(value),
+    valid: (value: string) => /^(?=.*[0-9])/.test(value)
   },
   {
     label: 'A special symbol (!@#$%^&*])',
-    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value),
+    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value)
   },
   {
     label: '12 to 64 characters',
-    valid: (value: string) => value.length >= 12 && value.length <= 64,
-  },
+    valid: (value: string) => value.length >= 12 && value.length <= 64
+  }
 ];
 
 const emailRules = [
   {
     valid: (value: string) =>
-      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value),
-  },
+      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)
+  }
 ];
 
 const Register = () => {
@@ -52,7 +52,7 @@ const Register = () => {
   };
   const onPasswordChange = ({
     value,
-    valid,
+    valid
   }: {
     value: string;
     valid: boolean;
@@ -70,33 +70,37 @@ const Register = () => {
   };
 
   return (
-    <Container height='100vh'>
-      <Column justifyContent='center' alignItems='center'>
-        <Container width='clamp(200px, 50%, 600px)'>
+    <Container height="100vh">
+      <Column justifyContent="center" alignItems="center">
+        <Container width="clamp(200px, 50%, 600px)">
           <Input
-            type='email'
-            label='Email'
+            type="email"
+            label="Email"
             onChange={onEmailChange}
             onSubmit={register}
             valid={emailValid && !isAuthError}
             invalid={isAuthError}
             hint={isAuthError ? authError : ''}
             rules={emailRules}
-            className='mb-md'
+            className="mb-md"
           />
           <Input
-            type='password'
-            label='Password'
+            type="password"
+            label="Password"
             onChange={onPasswordChange}
             onSubmit={register}
             valid={passwordValid}
-            hint='Password must contain:'
+            hint="Password must contain:"
             rules={passwordRules}
             showRules
-            className='mb-lg'
+            className="mb-lg"
           />
 
-          <Button onClick={register} label='Register' />
+          <Button
+            onClick={register}
+            label="Register"
+            disabled={!passwordValid || !emailValid}
+          />
         </Container>
       </Column>
     </Container>
