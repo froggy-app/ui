@@ -33,28 +33,32 @@ const Login = () => {
   };
 
   return (
-    <Container height='100vh'>
-      <Column justifyContent='center' alignItems='center'>
-        <Container width='clamp(200px, 50%, 600px)'>
+    <Container height="100vh">
+      <Column justifyContent="center" alignItems="center">
+        <Container width="clamp(200px, 50%, 600px)">
           <Input
-            type='email'
-            label='Email'
+            type="email"
+            label="Email"
             onChange={onEmailChange}
             onSubmit={login}
             invalid={invalid}
-            className='mb-md'
+            className="mb-md"
           />
           <Input
-            type='password'
-            label='Password'
+            type="password"
+            label="Password"
             onChange={onPasswordChange}
             onSubmit={login}
             invalid={invalid}
             hint={invalid ? 'Invalid username or password' : ''}
-            className='mb-md'
+            className="mb-md"
           />
 
-          <Button onClick={login} label='Log in' />
+          <Button
+            onClick={login}
+            label="Log in"
+            disabled={password.length == 0 || email.length == 0}
+          />
         </Container>
       </Column>
     </Container>
