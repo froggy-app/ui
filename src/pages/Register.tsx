@@ -45,7 +45,6 @@ const Register = () => {
   const navigate = useNavigate();
   const authError = useSelector(selectAuthError);
   const isAuthError = authError !== null;
-  const emailWarning = emailValid && !isAuthError;
 
   const onEmailChange = ({value, valid}: {value: string; valid: boolean}) => {
     setEmailValid(valid);
@@ -79,7 +78,7 @@ const Register = () => {
             label="Email"
             onChange={onEmailChange}
             onSubmit={register}
-            valid={emailWarning}
+            valid={emailValid && !isAuthError}
             invalid={isAuthError}
             hint={isAuthError ? authError : ''}
             rules={emailRules}
@@ -100,7 +99,7 @@ const Register = () => {
           <Button
             onClick={register}
             label="Register"
-            disabled={!passwordValid || !emailValid}
+            disabled={!passwordValid || !emailValid || isAuthError}
           />
         </Container>
       </Column>
