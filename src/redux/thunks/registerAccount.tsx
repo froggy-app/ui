@@ -13,7 +13,6 @@ const registerAccount: any = createAsyncThunk(
       if (response.errors) {
         return rejectWithValue(response);
       } else {
-        console.log(response);
         const {data} = response;
         const {expire} = data;
 

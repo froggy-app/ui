@@ -3,36 +3,54 @@ import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import selectAuthError from 'redux/selectors/selectAuthError';
+import {RegisterResponse} from 'redux/slices/auth_slice';
 import registerAccount from 'redux/thunks/registerAccount';
 
 const passwordRules = [
   {
     label: 'An uppercase character',
-    valid: (value: string) => /^(?=.*[A-Z])/.test(value),
+    valid: (value: string) => /^(?=.*[A-Z])/.test(value)
   },
   {
     label: 'A lowercase character',
-    valid: (value: string) => /^(?=.*[a-z])/.test(value),
+    valid: (value: string) => /^(?=.*[a-z])/.test(value)
   },
   {
     label: 'A number',
-    valid: (value: string) => /^(?=.*[0-9])/.test(value),
+    valid: (value: string) => /^(?=.*[0-9])/.test(value)
   },
   {
     label: 'A special symbol (!@#$%^&*])',
-    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value),
+    valid: (value: string) => /^(?=.*[!@#$%^&*])/.test(value)
   },
   {
     label: '12 to 64 characters',
-    valid: (value: string) => value.length >= 12 && value.length <= 64,
-  },
+    valid: (value: string) => value.length >= 12 && value.length <= 64
+  }
 ];
 
 const emailRules = [
   {
-    valid: (value: string) =>
-      /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value),
-  },
+    valid: (value: string) => {
+      const tokens = value.split('@');
+
+      if (tokens.length != 2) {
+        return false;
+      }
+
+      // Section before the @ (as well as domain name) is inherently valid because of the inputs allowed chars
+      const domainStr = tokens[1];
+      const domainTokens = domainStr.split('.');
+
+      if (domainTokens.length != 2) {
+        return false;
+      }
+
+      const tld = domainTokens[1];
+
+      return /^[a-zA-Z]+$/.test(tld);
+    }
+  }
 ];
 
 const Register = () => {
@@ -52,7 +70,7 @@ const Register = () => {
   };
   const onPasswordChange = ({
     value,
-    valid,
+    valid
   }: {
     value: string;
     valid: boolean;
@@ -62,41 +80,43 @@ const Register = () => {
   };
 
   const register = () => {
-    dispatch(registerAccount({email, password})).then(({payload}: any) => {
-      if (!payload.errors) {
-        navigate('/home');
+    dispatch(registerAccount({email, password})).then(
+      ({payload}: RegisterResponse) => {
+        if (payload && !payload.errors) {
+          navigate('/home');
+        }
       }
-    });
+    );
   };
 
   return (
-    <Container height='100vh'>
-      <Column justifyContent='center' alignItems='center'>
-        <Container width='clamp(200px, 50%, 600px)'>
+    <Container height="100vh">
+      <Column justifyContent="center" alignItems="center">
+        <Container width="clamp(200px, 50%, 600px)">
           <Input
-            type='email'
-            label='Email'
+            type="email"
+            label="Email"
             onChange={onEmailChange}
             onSubmit={register}
             valid={emailValid && !isAuthError}
             invalid={isAuthError}
             hint={isAuthError ? authError : ''}
             rules={emailRules}
-            className='mb-md'
+            className="mb-md"
           />
           <Input
-            type='password'
-            label='Password'
+            type="password"
+            label="Password"
             onChange={onPasswordChange}
             onSubmit={register}
             valid={passwordValid}
-            hint='Password must contain:'
+            hint="Password must contain:"
             rules={passwordRules}
             showRules
-            className='mb-lg'
+            className="mb-lg"
           />
 
-          <Button onClick={register} label='Register' />
+          <Button onClick={register} label="Register" />
         </Container>
       </Column>
     </Container>
