@@ -4,13 +4,13 @@ import {
   loginStatusFulfilled,
   loginStatusRejected,
   registrationStatusFulfilled,
-  registrationStatusRejected,
+  registrationStatusRejected
 } from 'redux/store';
 
 export const AUTH_PATH = 'auth';
 
 const initialState: AuthSlice = {
-  error: null,
+  error: null
 };
 
 const authSlice = createSlice({
@@ -32,7 +32,7 @@ const authSlice = createSlice({
         ) {
           return {error: 'An account with this email already exists'};
         } else {
-          return {error: 'Invalid credentials'};
+          return {error: 'Invalid email or password'};
         }
       }
     );
@@ -42,7 +42,7 @@ const authSlice = createSlice({
     builder.addCase(loginStatusRejected, (state, {payload: {error}}: any) => {
       return {error};
     });
-  },
+  }
 });
 
 const {reducer: auth_reducers} = authSlice;
